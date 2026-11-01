@@ -1,0 +1,59 @@
+id = "jayploss.history"
+name = "History"
+version = "0.1.0"
+min_herdr_version = "0.9.1"
+description = "Remember every space, open or closed, and reopen closed ones with their agents"
+platforms = ["linux", "macos"]
+
+[[startup]]
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "workspace.created"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "workspace.renamed"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "workspace.closed"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "tab.created"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "tab.renamed"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "tab.closed"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "pane.closed"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "pane.agent_detected"
+command = ["python3", "hh.py", "record"]
+
+[[events]]
+on = "pane.agent_status_changed"
+command = ["python3", "hh.py", "record"]
+
+[[actions]]
+id = "open"
+title = "Space history"
+contexts = ["workspace"]
+command = ["herdr", "plugin", "pane", "open", "--plugin", "jayploss.history", "--entrypoint", "picker"]
+
+[[panes]]
+id = "picker"
+title = "Space history"
+placement = "popup"
+width = "90%"
+height = "80%"
+command = ["python3", "hh.py", "pick"]
